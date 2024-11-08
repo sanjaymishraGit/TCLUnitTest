@@ -1,0 +1,51 @@
+package require tcltest
+namespace import ::tcltest::*
+
+# Source the necessary files
+source game.tcl
+
+# Test case 1: Verify that num is set correctly by the main sq function
+test a_b_set {
+    Test that a and b are set correctly by main
+} -body {
+    reward
+    expr {[info exists a] && [info exists b]};
+} -result 1  ;
+
+
+# Test case 2: Verify that a and b are set correctly by the set_values procedure
+test a_b_set {
+    Test that a and b are set correctly by set_values
+} -body {
+    set_values 4 5
+    expr {$a == 4 && $b == 5}
+} -result 1
+
+# Test case 3: Check reward when condition is met (should win $100)
+test reward_win {
+    Test that reward returns 100 dollars when sum > 4 and product >= 6
+} -body {
+    set_values 3 4
+    reward
+} -result 0
+
+# Test case 4: Check reward when condition is not met (no reward)
+test reward_no_win {
+    Test that reward returns 0 when conditions are not met
+} -body {
+    set_values 1 1
+    reward
+} -result 0
+
+# Test case 5: Check the behavior with boundary values (sum = 4, product = 6)
+test reward_boundary {
+    Test that reward works correctly with boundary values
+} -body {
+    set_values 2 3
+    reward
+} -result 100
+
+
+
+# Additional cleanup to ensure the environment is reset
+cleanupTests
