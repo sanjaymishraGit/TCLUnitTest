@@ -1,8 +1,5 @@
-# game.tcl
 
-# Source the math.tcl file
 source math.tcl
-source code_coverage.tcl
 
 # Global variables to hold values of a and b
 set a 0
@@ -10,7 +7,6 @@ set b 0
 
 # Procedure to set values of a and b
 proc set_values {x y} {
-    code_coverage set_values
     global a b
     set a $x
     set b $y
@@ -18,7 +14,6 @@ proc set_values {x y} {
 
 # Reward function
 proc reward {} {
-    code_coverage reward
     global a b
 
     # Calculate the addition and multiplication
